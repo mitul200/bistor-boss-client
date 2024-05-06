@@ -3,7 +3,7 @@ import React from "react";
 
 // eslint-disable-next-line react/prop-types
 const MenuItem = ({ item }) => {
-  console.log(item);
+  // console.log(item);
   // eslint-disable-next-line react/prop-types
   const { price, name, recipe, image } = item;
 
