@@ -24,6 +24,17 @@ const PopularMenu = () => {
           <MenuItem key={item._id} item={item} />
         ))}
       </div>
+      <div className="flex justify-center">
+        <button className="btn btn-outline border-0 border-b-4 ">
+          View Full Menu
+        </button>
+      </div>
+
+      <div className="h-[180px] bg-black my-32">
+        <h1 className="text-white text-5xl text-center p-16">
+          Call Us: +88 0192345678910
+        </h1>
+      </div>
     </div>
   );
 };
