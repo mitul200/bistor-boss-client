@@ -5,7 +5,7 @@ import { Parallax } from "react-parallax";
 const Cover = ({ menuImg, title }) => {
   return (
     <Parallax
-      blur={{ min: -15, max: 15 }}
+      blur={{ min: -50, max: 50 }}
       bgImage={menuImg}
       bgImageAlt="the dog"
       strength={-200}
@@ -20,7 +20,6 @@ const Cover = ({ menuImg, title }) => {
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
-            <button className="btn btn-primary">Get Started</button>
           </div>
         </div>
       </div>
