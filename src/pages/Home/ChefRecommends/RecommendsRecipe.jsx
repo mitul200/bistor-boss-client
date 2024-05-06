@@ -36,6 +36,11 @@ const recomends = [
 const RecommendsRecipe = () => {
   return (
     <section>
+      <div className="h-[180px] bg-black my-32">
+        <h1 className="text-white text-5xl text-center p-16">
+          Call Us: +88 0192345678910
+        </h1>
+      </div>
       <SectionTitle heading="---Should Try---" subHeading="CHEF RECOMMENDS" />
       <div className="grid grid-cols-3">
         {recomends.map((item) => (
