@@ -7,10 +7,12 @@ const FoodCard = (item) => {
         <img src={item.item.image} alt="Shoes" className="" />
       </figure>
       <div className="card-body items-center text-center">
-        <h2 className="card-title">{item.item.name}</h2>
-        <h2 className="card-title">{item.item.price}</h2>
+        <h2 className="card-title">Name : {item.item.name}</h2>
+        <h2 className="card-title">
+          Price : <span className="text-yellow-500">{item.item.price}</span>
+        </h2>
         <p>{item.item.recipe}</p>
-        <button className="btn btn-outline border-0 border-b-4 uppercase text-yellow-800">
+        <button className="btn btn-outline bg-slate-200 border-0 border-b-4 uppercase text-yellow-800">
           Add to cart
         </button>
       </div>

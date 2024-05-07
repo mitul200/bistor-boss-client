@@ -10,8 +10,11 @@ import soupImg from "../../../assets/menu/soup-bg.jpg";
 import useMenu from "../../../useHooks/useMenu";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import MenuCateGory from "../MenuCategory/MenuCateGory";
+// import { useParams } from "react-router-dom";
 const Menu = () => {
   const [menu] = useMenu();
+
+  // console.log(category);
   const saladItems = menu.filter((item) => item.category === "salad");
   const dessertItems = menu.filter((item) => item.category === "dessert");
   const pizzaItems = menu.filter((item) => item.category === "pizza");
