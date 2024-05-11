@@ -1,27 +1,60 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import img from "../../assets/others/authentication1.png";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../../Components/Provider/AuthProviders";
+import Swal from "sweetalert2";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
+  const { singIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  console.log(from);
+
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
   const handelSubmit = (event) => {
-    // console.log(e.target.value);
     event.preventDefault();
-    const from = event.target;
-    const email = from.email.value;
-    const password = from.password.value;
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
     console.log(email, password);
+    singIn(email, password)
+      .then((result) => {
+        const User = result.user;
+        console.log(User);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => console.error(err));
+
+    Swal.fire({
+      title: "Login in success full",
+      showClass: {
+        popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `,
+      },
+      hideClass: {
+        popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `,
+      },
+    });
   };
 
-  const handelValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handelValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
     console.log(user_captcha_value);
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
@@ -32,16 +65,14 @@ const Login = () => {
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content md:w-1/2 flex-col lg:flex-row">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+        <div className="hero-content flex-col lg:flex-row">
+          <div className="text-center lg:text-left w-1/2">
+            <img src={img} className="h-full" alt="" />
           </div>
-          <div className="card   md:w-1/2 max-w-sm shadow-2xl bg-base-100">
+          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <h1 className="text-4xl text-center font-bold text-blue-700 mt-4">
+              Login now!
+            </h1>
             <form onSubmit={handelSubmit} className="card-body">
               <div className="form-control">
                 <label className="label">
@@ -77,19 +108,14 @@ const Login = () => {
                   <LoadCanvasTemplate />
                 </label>
                 <input
-                  ref={captchaRef}
                   type="text"
+                  onBlur={handelValidateCaptcha}
                   placeholder="Type the text above"
                   name="captcha"
                   className="input input-bordered"
                   required
                 />
-                <button
-                  onClick={handelValidateCaptcha}
-                  className="btn  btn-info btn-xs"
-                >
-                  Info
-                </button>
+                {/* <button className="btn  btn-info btn-xs">Info</button> */}
               </div>
               <div className="form-control mt-6">
                 <input
@@ -99,6 +125,12 @@ const Login = () => {
                   className="btn btn-primary"
                 />
               </div>
+              <p>
+                New here? Create a New Account ...
+                <Link to="/singUp">
+                  <span className="text-blue-700">sing up</span>
+                </Link>
+              </p>
             </form>
           </div>
         </div>
