@@ -1,10 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from "react";
+import { TiShoppingCart } from "react-icons/ti";
+
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Components/Provider/AuthProviders";
+import useCart from "../../../useHooks/useCart";
 
 const Navber = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
 
   const handelLogout = () => {
     logOut()
@@ -25,13 +29,25 @@ const Navber = () => {
       <li>
         <Link to="order/salad">Order</Link>
       </li>
+      <li>
+        <Link to="">
+          <button className="btn">
+            <TiShoppingCart />
+            <div className="badge badge-secondary">+{cart.length || 0}</div>
+          </button>
+        </Link>
+      </li>
       {user ? (
         <>
-          <p>{user?.displayName}</p>
+          <li>
+            <p>{user?.displayName}</p>
+          </li>
           <img src={user?.photoURL} alt="" />
-          <button onClick={handelLogout} className="btn btn-ghost">
-            logout
-          </button>
+          <li>
+            <button onClick={handelLogout} className="btn btn-ghost">
+              logout
+            </button>
+          </li>
         </>
       ) : (
         <>

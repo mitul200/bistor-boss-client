@@ -63,9 +63,10 @@ const Order = () => {
         </TabPanel>
         <TabPanel>
           <div className="grid grid-cols-3">
-            {offeredItems.map((item) => (
-              <FoodCard key={item._id} item={item}></FoodCard>
-            ))}
+            {offeredItems.map((item) => {
+              // console.log(item)
+              return <FoodCard key={item._id} item={item}></FoodCard>;
+            })}
           </div>
         </TabPanel>
       </Tabs>
