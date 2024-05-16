@@ -4,8 +4,15 @@ import { IoWalletSharp } from "react-icons/io5";
 import { FaHome } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 import { LuMenu } from "react-icons/lu";
+import { TiThMenuOutline } from "react-icons/ti";
+import { FaUsers } from "react-icons/fa";
+import useCart from "../../useHooks/useCart";
+import { FaAddressBook } from "react-icons/fa6";
 
 const DashBoard = () => {
+  const [cart] = useCart();
+  // TODO
+  const isAdmin = true;
   return (
     <div>
       <div className="drawer lg:drawer-open ">
@@ -28,50 +35,88 @@ const DashBoard = () => {
           ></label>
           <ul className="menu p-4 w-80 min-h-full bg-[#D1A054] text-base-content">
             {/* Sidebar content here */}
-            <li>
-              <NavLink className="" to="/dashboard/Home">
-                <FaHome />
-                User Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/reservations">
-                <FaCalendarAlt />
-                Reservetion
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/mycart">
-                <RiShoppingCartFill />
-                my cart
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/hisotry">
-                <IoWalletSharp /> Payment History
-              </NavLink>
-            </li>
+            {isAdmin ? (
+              <>
+                <li>
+                  <NavLink className="" to="/dashboard/Home">
+                    <FaHome />
+                    Admin Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/reservations">
+                    <TiThMenuOutline />
+                    Add Items
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/mycart">
+                    <RiShoppingCartFill />
+                    Manage Item
+                    <div className="badge badge-secondary">
+                      +{cart.length || 0}
+                    </div>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/hisotry">
+                    <FaAddressBook /> Manage Booking
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/allUsers">
+                    <FaUsers /> All Users
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <NavLink className="" to="/dashboard/Home">
+                    <FaHome />
+                    User Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/reservations">
+                    <FaCalendarAlt />
+                    Reservetion
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/mycart">
+                    <RiShoppingCartFill />
+                    my cart
+                    <div className="badge badge-secondary">
+                      +{cart.length || 0}
+                    </div>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/hisotry">
+                    <IoWalletSharp /> Payment History
+                  </NavLink>
+                </li>
+              </>
+            )}
+
             <div className="divider"></div>
             <li>
-              {" "}
               <NavLink to="/">
                 <FaHome />
                 Home
               </NavLink>
             </li>
             <li>
-              {" "}
               <NavLink to="/">
                 <LuMenu />
                 Menu
               </NavLink>
             </li>
             <li>
-              {" "}
               <NavLink to="/"></NavLink>
             </li>
             <li>
-              {" "}
               <NavLink to="/"></NavLink>
             </li>
           </ul>

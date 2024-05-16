@@ -2,24 +2,33 @@ import { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  signInWithPopup,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import { app } from "../Firebase/firebase.config";
+import { GoogleAuthProvider } from "firebase/auth/cordova";
 
 export const AuthContext = createContext();
 // eslint-disable-next-line react/prop-types
 const auth = getAuth(app);
+
 // eslint-disable-next-line react/prop-types
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loding, setLoding] = useState(true);
+  
+  const googleProvider = new GoogleAuthProvider();
 
   const creatUser = (email, password) => {
     setLoding(true);
     return createUserWithEmailAndPassword(auth, email, password);
+  };
+  const singInGoogle = () => {
+    setLoding(true);
+    return signInWithPopup(auth, googleProvider);
   };
 
   const logOut = () => {
@@ -50,6 +59,7 @@ const AuthProviders = ({ children }) => {
   const authInfo = {
     user,
     loding,
+    singInGoogle,
     logOut,
     creatUser,
     singIn,

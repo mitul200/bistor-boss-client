@@ -20,18 +20,32 @@ const SingUp = () => {
     console.log(data);
     creatUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
+
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
+          const saveUser = { name: data.name, email: data.email };
+          // creating user to show AdminPanel //
+          fetch(`http://localhost:5000/users`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.insertedId) {
+                reset();
+                navigate("/");
+                Swal.fire({
+                  title: "User Created !",
+                  text: "New user has been created ! ",
+                  icon: "success",
+                });
+              }
+            });
           console.log("photot url is done");
-          reset();
-          navigate("/");
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "user created successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
         })
         .catch((err) => console.error(err));
       console.log(loggedUser);

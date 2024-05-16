@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import img from "../../assets/others/authentication1.png";
+
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -8,6 +9,7 @@ import {
 import { AuthContext } from "../../Components/Provider/AuthProviders";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -132,6 +134,7 @@ const Login = () => {
                 </Link>
               </p>
             </form>
+            <SocialLogin />
           </div>
         </div>
       </div>
