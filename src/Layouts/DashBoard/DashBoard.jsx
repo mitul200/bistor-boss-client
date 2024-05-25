@@ -8,11 +8,14 @@ import { TiThMenuOutline } from "react-icons/ti";
 import { FaUsers } from "react-icons/fa";
 import useCart from "../../useHooks/useCart";
 import { FaAddressBook } from "react-icons/fa6";
+import useAdmin from "../../useHooks/useAdmin";
+// import useAdmin from "../../useHooks/useAdmin";
 
 const DashBoard = () => {
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
   // TODO
-  const isAdmin = true;
+  // const isAdmin = true;
   return (
     <div>
       <div className="drawer lg:drawer-open ">
@@ -44,7 +47,7 @@ const DashBoard = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/reservations">
+                  <NavLink className="" to="/dashboard/addItem">
                     <TiThMenuOutline />
                     Add Items
                   </NavLink>

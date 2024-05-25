@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { app } from "../Firebase/firebase.config";
 import { GoogleAuthProvider } from "firebase/auth/cordova";
+import axios from "axios";
 
 export const AuthContext = createContext();
 // eslint-disable-next-line react/prop-types
@@ -19,7 +20,6 @@ const auth = getAuth(app);
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loding, setLoding] = useState(true);
-  
   const googleProvider = new GoogleAuthProvider();
 
   const creatUser = (email, password) => {
@@ -50,8 +50,18 @@ const AuthProviders = ({ children }) => {
     const unSubcribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log("currentUser", currentUser);
+
+      // get jwt token
+      axios
+        .post(`http://localhost:5000/jwt`, { email: currentUser.email })
+        .then((data) => {
+          console.log(data.data.token);
+          localStorage.setItem("access-token", data.data.token);
+        });
+
       setLoding(false);
     });
+
     return () => {
       return unSubcribe();
     };

@@ -10,6 +10,8 @@ import PrivetRouts from "./PrivetRouts";
 import DashBoard from "../Layouts/DashBoard/DashBoard";
 import MyCart from "../Layouts/DashBoard/MyCart/MyCart";
 import AllUsers from "../Layouts/DashBoard/AllUsers/AllUsers";
+import AddItems from "../Layouts/DashBoard/AddItems/AddItems";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -60,7 +62,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "allUsers",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "addItem",
+        element: (
+          <AdminRoute>
+            <AddItems />
+          </AdminRoute>
+        ),
       },
     ],
   },
