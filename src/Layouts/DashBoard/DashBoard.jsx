@@ -53,12 +53,9 @@ const DashBoard = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/mycart">
+                  <NavLink to="/dashboard/manageItems">
                     <RiShoppingCartFill />
                     Manage Item
-                    <div className="badge badge-secondary">
-                      +{cart.length || 0}
-                    </div>
                   </NavLink>
                 </li>
                 <li>
@@ -96,7 +93,7 @@ const DashBoard = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/hisotry">
+                  <NavLink to="/dashboard/payment">
                     <IoWalletSharp /> Payment History
                   </NavLink>
                 </li>
